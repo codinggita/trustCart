@@ -26,7 +26,7 @@ const AppRouter = () => {
 
       {/* Semi-Protected / Feature Routes */}
       <Route path="/stores" element={<StoreAvailability />} />
-      <Route path="/verify" element={<ProductVerification />} />
+      <Route path="/verify/:barcode?" element={<ProductVerification />} />
       <Route path="/checkout" element={<CheckoutPage />} />
 
       {/* Protected Routes */}
