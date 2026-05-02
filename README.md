@@ -4,9 +4,11 @@
 
 ---
 
-## 🚀 Live Demo & Design
+## 🚀 Live Demo, API & Design
 
-🌐 **Live Deployment:** [Add your live deployed root URL here (e.g., Vercel/Render)]()
+🌐 **Live Deployment:** [TrustCart on Render](https://trustcart-6z1u.onrender.com)
+
+📄 **API Documentation (Postman):** [View API Docs](https://documenter.getpostman.com/view/50839415/2sBXqKofEU)
 
 🎨 **Live Design (Figma):** [View Design Here](https://www.figma.com/design/OeTK6QvvpyBEv8V4GX30Kp/TrustCart?node-id=0-1&t=KMUeGZuRmXH04Hui-1)
 

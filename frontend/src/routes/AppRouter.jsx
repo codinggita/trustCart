@@ -16,8 +16,8 @@ import ProtectedRoute from './ProtectedRoute';
 const AppRouter = () => {
   return (
     <Routes>
-      {/* Default: redirect root to home */}
-      <Route path="/" element={<Navigate to="/home" replace />} />
+      {/* Default: redirect root to login */}
+      <Route path="/" element={<Navigate to="/login" replace />} />
 
       {/* Public Routes */}
       <Route path="/login" element={<LoginPage />} />
@@ -26,7 +26,7 @@ const AppRouter = () => {
 
       {/* Semi-Protected / Feature Routes */}
       <Route path="/stores" element={<StoreAvailability />} />
-      <Route path="/verify" element={<ProductVerification />} />
+      <Route path="/verify/:barcode?" element={<ProductVerification />} />
       <Route path="/checkout" element={<CheckoutPage />} />
 
       {/* Protected Routes */}
