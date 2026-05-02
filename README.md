@@ -4,9 +4,11 @@
 
 ---
 
-## 🌐 Live Design (Figma)
+## 🚀 Live Demo & Design
 
-👉 https://www.figma.com/design/OeTK6QvvpyBEv8V4GX30Kp/TrustCart?node-id=0-1&t=KMUeGZuRmXH04Hui-1
+🌐 **Live Deployment:** [Add your live deployed root URL here (e.g., Vercel/Render)]()
+
+🎨 **Live Design (Figma):** [View Design Here](https://www.figma.com/design/OeTK6QvvpyBEv8V4GX30Kp/TrustCart?node-id=0-1&t=KMUeGZuRmXH04Hui-1)
 
 ---
 
