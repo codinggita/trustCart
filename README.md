@@ -1,11 +1,5 @@
 # 🚀 TrustCart: The Digital Authenticity Ledger
 
-[![Live Demo](https://img.shields.io/badge/Live-Deployment-00E5FF?style=for-the-badge&logo=vercel&logoColor=black)](https://trust-cart-store.vercel.app/)
-[![Figma Design](https://img.shields.io/badge/Figma-Design-F24E1E?style=for-the-badge&logo=figma&logoColor=white)](https://www.figma.com/design/OeTK6QvvpyBEv8V4GX30Kp/TrustCart?node-id=0-1&t=OaXIQEskQWPLRmXj-0)
-[![Postman Docs](https://img.shields.io/badge/Postman-API_Docs-FF6C37?style=for-the-badge&logo=postman&logoColor=white)](https://documenter.getpostman.com/view/50839415/2sBXqKofEU)
-[![Backend API](https://img.shields.io/badge/Backend-API_Endpoint-green?style=for-the-badge&logo=node.js&logoColor=white)](https://trustcart-6z1u.onrender.com/)
-[![YouTube Channel](https://img.shields.io/badge/YouTube-CodeVerse_Aditya-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@CodeVerseAditya)
-
 ---
 
 ![TrustCart Banner](docs/images/banner.png)
