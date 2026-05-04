@@ -8,7 +8,7 @@
 
 ---
 
-![TrustCart Banner](./docs/images/banner.png)
+![TrustCart Banner](docs/images/banner.png)
 
 ## 📌 Problem Statement
 
@@ -53,7 +53,7 @@ TrustCart is a high-tech "Integrity Economy" platform that bridges the gap betwe
 ## 📸 Screenshots
 
 ### Product Verification Interface
-![Verification UI](./docs/images/verification_ui.png)
+![Verification UI](docs/images/verification_ui.png)
 
 ---
 
@@ -133,7 +133,5 @@ trustCart/
 
 **Aditya Kumar**
 *Bridging the gap between code and trust.*
-
-[![YouTube](https://img.shields.io/badge/YouTube-@CodeVerseAditya-FF0000?style=flat-square&logo=youtube)](https://www.youtube.com/@CodeVerseAditya)
 
 ---
