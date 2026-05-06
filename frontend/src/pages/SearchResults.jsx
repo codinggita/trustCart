@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { useCart } from '../context/CartContext';
+import api from '../services/api';
 
 const ALL_PRODUCTS = [
   {
@@ -152,15 +153,49 @@ const SearchResults = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedBrand, setSelectedBrand] = useState(null);
   const [verifyingKey, setVerifyingKey] = useState(null);
+  const [apiProducts, setApiProducts] = useState([]);
   const itemsPerPage = 8;
-  
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const { data } = await api.get('/api/products', {
+          params: { category: searchParams.get('category'), search: searchParams.get('query') }
+        });
+        if (data.success && data.products.length > 0) {
+          // Map API products to frontend format
+          const mapped = data.products.map(p => ({
+            id: p._id,
+            category: p.category,
+            title: p.name,
+            desc: p.description,
+            score: p.trustScore || "99.9%",
+            price: p.price || 0,
+            badge: p.isAuthentic ? "L3 Certified" : "Flagged",
+            badgeColor: p.isAuthentic ? "primary" : "error",
+            image: p.imageUrl
+          }));
+          setApiProducts(mapped);
+        } else {
+          setApiProducts([]);
+        }
+      } catch (err) {
+        console.error('Failed to fetch from API, using mock data');
+        setApiProducts([]);
+      }
+    };
+    fetchProducts();
+  }, [searchParams]);
+
   const activeCategory = searchParams.get('category');
   const searchQuery = searchParams.get('query');
 
   const filteredProducts = useMemo(() => {
-    let result = [...ALL_PRODUCTS];
+    // If API returned results, use them. Otherwise fallback to mock data for demonstration.
+    let result = apiProducts.length > 0 ? [...apiProducts] : [...ALL_PRODUCTS];
 
-    if (activeCategory) {
+    // Re-filter mock data if using it
+    if (apiProducts.length === 0) {
       result = result.filter(p => p.category.toLowerCase() === activeCategory.toLowerCase());
     }
 
