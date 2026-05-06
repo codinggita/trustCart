@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../services/api';
 
 const SignupPage = () => {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ const SignupPage = () => {
     setLoading(true);
     
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/register', formData);
+      const response = await api.post('/api/auth/register', formData);
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('isAuthenticated', 'true');
       navigate('/home');

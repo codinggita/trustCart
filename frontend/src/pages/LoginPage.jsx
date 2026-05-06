@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useGoogleLogin } from '@react-oauth/google';
-import axios from 'axios';
+import api from '../services/api';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const LoginPage = () => {
     setError('');
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+      const response = await api.post('/api/auth/login', { email, password });
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('isAuthenticated', 'true');
       navigate('/home');
@@ -38,7 +38,7 @@ const LoginPage = () => {
     setLoading(true);
     try {
       // Mocking SSO for demonstration
-      const response = await axios.post('http://localhost:5000/api/auth/sso', { domain: orgDomain });
+      const response = await api.post('/api/auth/sso', { domain: orgDomain });
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('isAuthenticated', 'true');
       navigate('/home');
@@ -52,7 +52,7 @@ const LoginPage = () => {
   const loginWithGoogle = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       try {
-        const res = await axios.post('http://localhost:5000/api/auth/google', {
+        const res = await api.post('/api/auth/google', {
           token: tokenResponse.access_token,
         });
         localStorage.setItem('token', res.data.token);

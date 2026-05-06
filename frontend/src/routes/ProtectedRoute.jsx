@@ -2,9 +2,8 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ children }) => {
-  // Mock authentication check
-  // In a real app, this would check a Redux state or a valid JWT
-  const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+  // Authentication check
+  const isAuthenticated = !!localStorage.getItem('token');
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;

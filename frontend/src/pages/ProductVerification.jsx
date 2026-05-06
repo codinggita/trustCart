@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import api from '../services/api';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
@@ -14,7 +14,7 @@ const ProductVerification = () => {
     if (barcode) {
       const fetchProduct = async () => {
         try {
-          const response = await axios.get(`http://localhost:5000/api/products/verify/${barcode}`);
+          const response = await api.get(`/api/products/verify/${barcode}`);
           setProduct(response.data.product);
         } catch (err) {
           setError(err.response?.data?.message || 'Verification failed. This barcode is not in our secure ledger.');

@@ -16,6 +16,8 @@ const productSchema = new mongoose.Schema(
     category: { type: String, trim: true },
     description: { type: String },
     isAuthentic: { type: Boolean, default: true },
+    trustScore: { type: String, default: "99.9%" },
+    price: { type: Number, default: 0 },
     stores: [
       {
         name: String,

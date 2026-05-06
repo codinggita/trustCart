@@ -2,7 +2,8 @@ const User = require('../models/user.model');
 const generateToken = require('../utils/generateToken');
 const { OAuth2Client } = require('google-auth-library');
 
-const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID || 'YOUR_GOOGLE_CLIENT_ID');
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+const axios = require('axios');
 
 // @desc  Register new user
 // @route POST /api/auth/register
@@ -59,38 +60,40 @@ const getMe = async (req, res) => {
 const googleLogin = async (req, res) => {
   try {
     const { token } = req.body;
-    
-    // Attempt verification (might fail if missing real google credentials but that's by design)
-    // For demo purposes, we will treat valid tokens safely, and catch missing/mock tokens.
+    let email, name;
+
     try {
+      // Try verifying as ID Token first
       const ticket = await client.verifyIdToken({
         idToken: token,
         audience: process.env.GOOGLE_CLIENT_ID,
       });
-      const { email, name } = ticket.getPayload();
-      
-      let user = await User.findOne({ email });
-      if (!user) {
-        user = await User.create({ name, email, password: Math.random().toString(36).slice(-8) });
+      const payload = ticket.getPayload();
+      email = payload.email;
+      name = payload.name;
+    } catch (idTokenError) {
+      // If ID Token verification fails, try as Access Token via userinfo endpoint
+      try {
+        const response = await axios.get(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${token}`);
+        email = response.data.email;
+        name = response.data.name;
+      } catch (accessTokenError) {
+        // Mock fallback if both fail (for demo/development)
+        email = 'google.mock@user.com';
+        name = 'Google Mock User';
       }
-
-      res.status(200).json({
-        success: true,
-        token: generateToken(user._id),
-        user: { id: user._id, name: user.name, email: user.email },
-      });
-    } catch (verifyError) {
-       // Mock fallback if google client integration fails due to lack of ENV keys
-       let user = await User.findOne({ email: 'google.mock@user.com' });
-       if (!user) {
-         user = await User.create({ name: 'Google Mock User', email: 'google.mock@user.com', password: 'mockpassword' });
-       }
-       res.status(200).json({
-          success: true,
-          token: generateToken(user._id),
-          user: { id: user._id, name: user.name, email: user.email },
-       });
     }
+    
+    let user = await User.findOne({ email });
+    if (!user) {
+      user = await User.create({ name, email, password: Math.random().toString(36).slice(-8) });
+    }
+
+    res.status(200).json({
+      success: true,
+      token: generateToken(user._id),
+      user: { id: user._id, name: user.name, email: user.email, role: user.role },
+    });
   } catch (error) {
     res.status(500).json({ success: false, message: 'Server error processing Google token' });
   }
