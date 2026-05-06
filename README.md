@@ -8,7 +8,7 @@
 
 ---
 
-![TrustCart Banner](docs/images/banner.png)
+![TrustCart Banner](frontend/src/assets/banner.png)
 
 ## 📌 Problem Statement
 
@@ -53,7 +53,7 @@ TrustCart is a high-tech "Integrity Economy" platform that bridges the gap betwe
 ## 📸 Screenshots
 
 ### Product Verification Interface
-![Verification UI](docs/images/verification_ui.png)
+![Verification UI](frontend/src/assets/verification_ui.png)
 
 ---
 
