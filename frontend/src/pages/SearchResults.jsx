@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -196,16 +196,17 @@ const SearchResults = () => {
 
     // Re-filter mock data if using it
     if (apiProducts.length === 0) {
-      result = result.filter(p => p.category.toLowerCase() === activeCategory.toLowerCase());
-    }
-
-    if (searchQuery) {
-      const term = searchQuery.toLowerCase();
-      result = result.filter(p => 
-        p.title.toLowerCase().includes(term) || 
-        p.desc.toLowerCase().includes(term) ||
-        p.category.toLowerCase().includes(term)
-      );
+      if (activeCategory) {
+        result = result.filter(p => p.category?.toLowerCase() === activeCategory.toLowerCase());
+      }
+      if (searchQuery) {
+        const term = searchQuery.toLowerCase();
+        result = result.filter(p => 
+          p.title?.toLowerCase().includes(term) || 
+          p.desc?.toLowerCase().includes(term) ||
+          p.category?.toLowerCase().includes(term)
+        );
+      }
     }
 
     // Functional Sorting logic
@@ -225,7 +226,7 @@ const SearchResults = () => {
     });
 
     return result;
-  }, [activeCategory, searchQuery, sortBy]);
+  }, [activeCategory, searchQuery, sortBy, apiProducts]);
 
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
   const paginatedProducts = useMemo(() => {
